@@ -31,6 +31,7 @@ public class LoginController {
 
     @FXML
     void onClickConnection(ActionEvent event) {
+        
         StartApplication.changeScene("accueil/loginView");
 
         erreur.setText("Erreur");
@@ -43,10 +44,6 @@ public class LoginController {
 
     @FXML
     void onClickMdp(ActionEvent event) {
-        StartApplication.changeScene("accueil/mdpView");
-    }
-    @FXML
-    protected void onHelloButtonClick() {
-
+        StartApplication.changeScene("accueil/loginView");
     }
 }
