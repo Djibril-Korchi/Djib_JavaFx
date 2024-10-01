@@ -31,19 +31,22 @@ public class LoginController {
 
     @FXML
     void onClickConnection(ActionEvent event) {
-        
-        StartApplication.changeScene("accueil/loginView");
+        if(this.email.getText().equals("") || this.mdp.getText().equals("")) {
+            StartApplication.changeScene("page_accueil");
+        }else {
+            erreur.setText("Erreur");
+        }
 
-        erreur.setText("Erreur");
+
     }
 
     @FXML
     void onClickInscription(ActionEvent event) {
-        StartApplication.changeScene("accueil/inscriptionView");
+        StartApplication.changeScene("inscriptionView");
     }
 
     @FXML
     void onClickMdp(ActionEvent event) {
-        StartApplication.changeScene("accueil/loginView");
+        StartApplication.changeScene("loginView");
     }
 }

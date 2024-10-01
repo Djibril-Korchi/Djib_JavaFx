@@ -1,11 +1,16 @@
 package appli.accueil;
 
 import appli.StartApplication;
+import appli.database.Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class InscriptionController {
 
@@ -32,12 +37,13 @@ public class InscriptionController {
 
     @FXML
     void onClickInscription(ActionEvent event) {
-        StartApplication.changeScene("acceuil/InscriptionController");
+
+
     }
 
     @FXML
     void onClickRetour(ActionEvent event) {
-        StartApplication.changeScene("accueil/loginView");
+        StartApplication.changeScene("loginView");
     }
 
 }
