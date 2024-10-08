@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.UserControlleur;
+
+import java.sql.SQLException;
 
 public class LoginController {
 
@@ -24,20 +27,16 @@ public class LoginController {
     private Button inscription;
 
     @FXML
-    private Button mdp;
+    private PasswordField mdp;
 
     @FXML
-    private PasswordField mdpButton;
+    private Button mdpButton;
 
     @FXML
-    void onClickConnection(ActionEvent event) {
-        if(this.email.getText().equals("") || this.mdp.getText().equals("")) {
-            StartApplication.changeScene("page_accueil");
-        }else {
-            erreur.setText("Erreur");
-        }
+    void onClickConnection(ActionEvent event) throws SQLException {
+        UserControlleur userControlleur = new UserControlleur();
 
-
+        userControlleur.connection(this.email.getText(),this.mdp.getText());
     }
 
     @FXML

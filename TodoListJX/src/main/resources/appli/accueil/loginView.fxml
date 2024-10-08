@@ -12,7 +12,7 @@
       <TextField fx:id="email" layoutX="86.0" layoutY="105.0" />
       <Label fx:id="erreur" layoutX="146.0" layoutY="236.0" textFill="RED" />
       <Button fx:id="Connection" layoutX="121.0" layoutY="272.0" mnemonicParsing="false" onAction="#onClickConnection" text="Connection" />
-      <Button fx:id="mdp" layoutX="99.0" layoutY="306.0" mnemonicParsing="false" onAction="#onClickMdp" text="Mot de passe oublié" />
+      <Button fx:id="mdpButton" layoutX="99.0" layoutY="306.0" mnemonicParsing="false" onAction="#onClickMdp" text="Mot de passe oublié" />
       <Button fx:id="inscription" layoutX="124.0" layoutY="341.0" mnemonicParsing="false" onAction="#onClickInscription" text="Inscription" />
       <Label layoutX="106.0" layoutY="153.0" text="Votre mot de passe :" />
       <Label layoutX="128.0" layoutY="73.0" text="Votre Email :" />
@@ -21,6 +21,6 @@
             <Font size="29.0" />
          </font>
       </Label>
-      <PasswordField fx:id="mdpButton" layoutX="86.0" layoutY="188.0" />
+      <PasswordField fx:id="mdp" layoutX="86.0" layoutY="188.0" />
    </children>
 </Pane>

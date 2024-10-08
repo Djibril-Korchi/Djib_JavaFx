@@ -1,15 +1,14 @@
 package appli.accueil;
 
 import appli.StartApplication;
-import appli.database.Database;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import model.UserControlleur;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class InscriptionController {
@@ -36,9 +35,9 @@ public class InscriptionController {
     private Button retour;
 
     @FXML
-    void onClickInscription(ActionEvent event) {
-
-
+    void onClickInscription(ActionEvent event) throws SQLException {
+        UserControlleur userControlleur = new UserControlleur(this.nom.getText(),this.prenom.getText(),this.email.getText(),this.mdp.getText());
+        userControlleur.inscription(this.mdp_c.getText());
     }
 
     @FXML

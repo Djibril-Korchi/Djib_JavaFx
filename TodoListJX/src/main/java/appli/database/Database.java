@@ -5,13 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    private String server="localhost";
+    private String server="localhost:3306";
     private String nomDeLaBase="javafx";
     private String utilisateur="root";
     private String mdp="";
 
     public String getUrl() {
-        return "jdbc:mysql://"+server+"/"+nomDeLaBase+"?serverTimezone=UTC";
+        return "jdbc:mysql://"+server+"/"+nomDeLaBase;
     }
     public Connection getConnection() {
         try {
