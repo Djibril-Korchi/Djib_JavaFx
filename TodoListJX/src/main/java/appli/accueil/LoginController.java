@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.UserControlleur;
+import model.repository.UtilisateurRepository;
 
 import java.sql.SQLException;
 
@@ -34,9 +35,8 @@ public class LoginController {
 
     @FXML
     void onClickConnection(ActionEvent event) throws SQLException {
-        UserControlleur userControlleur = new UserControlleur();
-
-        userControlleur.connection(this.email.getText(),this.mdp.getText());
+        UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
+        utilisateurRepository.connection(this.email.getText());
     }
 
     @FXML

@@ -13,6 +13,9 @@ public class UserControlleur {
     private String email;
     private String mdp;
 
+    public UserControlleur(int anInt, String string, String string1, String string2, String string3) {
+    }
+
     public int getIdUser() {
         return idUser;
     }
@@ -54,12 +57,6 @@ public class UserControlleur {
     }
     public UserControlleur() {
     }
-    public UserControlleur(String nom, String prenom, String email, String mdp) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.mdp = mdp;
-    }
 
     @Override
     public String toString() {
@@ -70,44 +67,5 @@ public class UserControlleur {
                 ", email='" + email + '\'' +
                 ", mdp='" + mdp + '\'' +
                 '}';
-    }
-
-    public void inscription(String mdp_p) throws SQLException {
-        Database database = new Database();
-        UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
-        if (this.getNom().isEmpty()||this.getPrenom().isEmpty()||this.getEmail().isEmpty()||this.getMdp().isEmpty()||mdp_p.isEmpty()) {
-            StartApplication.changeScene("inscriptionView");
-        }
-        if (this.mdp.equals(mdp_p)) {
-            ResultSet resultat = utilisateurRepository.inscription(getEmail());
-            System.out.println(mdp_p);
-            if (resultat.next()) {
-                StartApplication.changeScene("inscriptionView");
-            }else {
-                PreparedStatement requetePrepareInsert = database.getConnection().prepareStatement("INSERT INTO Utilisateur(nom,prenom,email,mot_de_passe) VALUES(?,?,?,?)");
-                requetePrepareInsert.setString(1, getNom());
-                requetePrepareInsert.setString(2, getPrenom());
-                requetePrepareInsert.setString(3, getEmail());
-                requetePrepareInsert.setString(4, mdp_p);
-                requetePrepareInsert.executeUpdate();
-                StartApplication.changeScene("loginView");
-            }
-        }else {
-            StartApplication.changeScene("inscriptionView");
-        }
-    }
-    public void connection(String email,String mdp) throws SQLException {
-        UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
-        ResultSet data = utilisateurRepository.connection(email, mdp);
-        if (data.next()) {
-            setIdUser(data.getInt(1));
-            setNom(data.getString(2));
-            setPrenom(data.getString(3));
-            setEmail(data.getString(4));
-            setMdp(data.getString(5));
-            StartApplication.changeScene("AccueilView");
-        }else {
-            StartApplication.changeScene("loginView");
-        }
     }
 }

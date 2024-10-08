@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.UserControlleur;
+import model.repository.UtilisateurRepository;
 
 import java.sql.SQLException;
 
@@ -36,8 +37,8 @@ public class InscriptionController {
 
     @FXML
     void onClickInscription(ActionEvent event) throws SQLException {
-        UserControlleur userControlleur = new UserControlleur(this.nom.getText(),this.prenom.getText(),this.email.getText(),this.mdp.getText());
-        userControlleur.inscription(this.mdp_c.getText());
+        UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
+        utilisateurRepository.inscription(this.nom.getText(),this.prenom.getText(),this.email.getText(),this.mdp.getText(),this.mdp_c.getText());
     }
 
     @FXML

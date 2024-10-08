@@ -9,6 +9,7 @@ module com.example.todolistjx {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires spring.security.crypto;
 
     opens appli to javafx.fxml;
     exports appli;
