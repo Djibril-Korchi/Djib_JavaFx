@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import model.UserControlleur;
 import model.repository.UtilisateurRepository;
 
 import java.sql.SQLException;
@@ -43,7 +42,7 @@ public class InscriptionController {
 
     @FXML
     void onClickRetour(ActionEvent event) {
-        StartApplication.changeScene("loginView");
+        StartApplication.changeScene("accueil/loginView");
     }
 
 }

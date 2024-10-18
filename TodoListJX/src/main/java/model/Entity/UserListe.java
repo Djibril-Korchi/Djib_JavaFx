@@ -1,6 +1,6 @@
-package model;
+package model.Entity;
 
-public class UserListeControlleur {
+public class UserListe {
     private int ref_user;
     private int ref_liste;
 

@@ -11,8 +11,11 @@ module com.example.todolistjx {
     requires java.sql;
     requires spring.security.crypto;
 
+    opens model.Entity to javafx.base;
     opens appli to javafx.fxml;
     exports appli;
     exports appli.accueil;
     opens appli.accueil to javafx.fxml;
+    exports appli.liste;
+    opens appli.liste to javafx.fxml;
 }

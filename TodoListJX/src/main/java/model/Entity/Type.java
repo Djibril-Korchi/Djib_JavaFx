@@ -1,6 +1,6 @@
-package model;
+package model.Entity;
 
-public class TypeControlleur {
+public class Type {
     private int idType;
     private String nom;
     private String code_coulleur;

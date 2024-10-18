@@ -7,8 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import model.UserControlleur;
 import model.repository.UtilisateurRepository;
 
 import java.sql.SQLException;
@@ -41,11 +39,11 @@ public class LoginController {
 
     @FXML
     void onClickInscription(ActionEvent event) {
-        StartApplication.changeScene("inscriptionView");
+        StartApplication.changeScene("accueil/inscriptionView");
     }
 
     @FXML
     void onClickMdp(ActionEvent event) {
-        StartApplication.changeScene("loginView");
+        StartApplication.changeScene("accueil/loginView");
     }
 }

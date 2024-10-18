@@ -1,19 +1,13 @@
-package model;
+package model.Entity;
 
-import appli.StartApplication;
-import appli.database.Database;
-import model.repository.UtilisateurRepository;
-
-import java.sql.*;
-
-public class UserControlleur {
+public class User {
     private int idUser;
     private String nom;
     private String prenom;
     private String email;
     private String mdp;
 
-    public UserControlleur(int anInt, String string, String string1, String string2, String string3) {
+    public User(int anInt, String string, String string1, String string2, String string3) {
     }
 
     public int getIdUser() {
@@ -55,7 +49,7 @@ public class UserControlleur {
     public void setMdp(String mdp) {
         this.mdp = mdp;
     }
-    public UserControlleur() {
+    public User() {
     }
 
     @Override

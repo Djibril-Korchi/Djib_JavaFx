@@ -21,7 +21,7 @@ public class StartApplication extends Application {
 
     public static void changeScene(String nomDuFichier) {
         mainStage.close();
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("accueil/"+nomDuFichier + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource(nomDuFichier + ".fxml"));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());

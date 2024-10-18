@@ -2,7 +2,7 @@ package model.repository;
 
 import appli.StartApplication;
 import appli.database.Database;
-import model.UserControlleur;
+import model.Entity.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.*;
@@ -17,12 +17,12 @@ public class UtilisateurRepository {
         requetePrepare.setString(1, email);
         ResultSet resultat = requetePrepare.executeQuery();
         if (nom.isEmpty()||prenom.isEmpty()||email.isEmpty()||mdp.isEmpty()||mdp_p.isEmpty()) {
-            StartApplication.changeScene("inscriptionView");
+            StartApplication.changeScene("accueil/inscriptionView");
         }
         if (mdp.equals(mdp_p)) {
 
             if (resultat.next()) {
-                StartApplication.changeScene("inscriptionView");
+                StartApplication.changeScene("accueil/inscriptionView");
             }else {
                 PreparedStatement requetePrepareInsert = db.getConnection().prepareStatement("INSERT INTO Utilisateur(nom,prenom,email,mot_de_passe) VALUES(?,?,?,?)");
                 requetePrepareInsert.setString(1, nom);
@@ -30,10 +30,10 @@ public class UtilisateurRepository {
                 requetePrepareInsert.setString(3, email);
                 requetePrepareInsert.setString(4, encoder.encode(mdp));
                 requetePrepareInsert.executeUpdate();
-                StartApplication.changeScene("loginView");
+                StartApplication.changeScene("accueil/loginView");
             }
         }else {
-            StartApplication.changeScene("inscriptionView");
+            StartApplication.changeScene("accueil/inscriptionView");
         }
     }
     public void connection(String email) throws SQLException {
@@ -42,10 +42,11 @@ public class UtilisateurRepository {
         requetePrepare.setString(1, email);
         ResultSet resultat = requetePrepare.executeQuery();
         if (resultat.next()) {
-            UserControlleur userControlleur = new UserControlleur(resultat.getInt(1),resultat.getString(2),resultat.getString(3),resultat.getString(4),resultat.getString(5));
-            StartApplication.changeScene("AccueilView");
+            System.out.println("test");
+            User userControlleur = new User(resultat.getInt(1),resultat.getString(2),resultat.getString(3),resultat.getString(4),resultat.getString(5));
+            StartApplication.changeScene("accueil/AccueilView");
         }else {
-            StartApplication.changeScene("loginView");
+            StartApplication.changeScene("accueil/loginView");
         }
     }
 }

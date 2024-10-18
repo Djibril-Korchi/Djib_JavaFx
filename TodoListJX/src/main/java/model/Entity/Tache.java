@@ -1,6 +1,6 @@
-package model;
+package model.Entity;
 
-public class TacheControlleur {
+public class Tache {
     private int idTache;
     private String nom;
     private int etat;
