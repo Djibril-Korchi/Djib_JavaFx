@@ -1,20 +1,18 @@
 package appli.accueil;
 import appli.StartApplication;
-import appli.database.Database;
+import appli.liste.EditerListeControlleur;
 import eu.hansolo.toolbox.observables.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import model.Entity.Liste;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import model.repository.ListeRepository;
-
+import javafx.scene.control.Alert;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -29,6 +27,8 @@ public class PageAccueilControlleur implements Initializable {
 
     @FXML
     private Button type;
+
+    private Button delete;
 
     @FXML
     void OnClickType(ActionEvent event) {
@@ -46,9 +46,9 @@ public class PageAccueilControlleur implements Initializable {
     }
 
     public void initialize(URL url, ResourceBundle rb) {
-        String[][] colonnes ={
-                {"Id liste","idListe"},
-                {"Nom","nom"}
+        String[][] colonnes = {
+                {"Id liste", "idListe"},
+                {"Nom", "nom"}
         };
         for (int i= 0; i < colonnes.length; i++) {
             TableColumn<Liste, String> maColone = new TableColumn<>(colonnes[i][0]);
@@ -56,14 +56,45 @@ public class PageAccueilControlleur implements Initializable {
             tableauListe.getColumns().add(maColone);
         }
         ListeRepository liste = new ListeRepository();
-        try {
-            ObservableList<Liste> list =liste.liste();
 
+        try {
+            ObservableList<Liste> list = liste.liste();
             for (int i = 0 ; i < list.size(); i++) {
                 tableauListe.getItems().add(list.get(i));
             }
         } catch (SQLException e) {
-        throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    void onListeSelection(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY) {
+            if (event.getClickCount() == 2) {
+                TablePosition cell = tableauListe.getSelectionModel().getSelectedCells().get(0);
+                int indexLigne = cell.getRow();
+                TableColumn colonne = cell.getTableColumn();
+                int id = tableauListe.getItems().get(indexLigne).getIdListe();
+                System.out.println(id);
+                StartApplication.changeSceneInfo("liste/editerlisteView",new EditerListeControlleur(id));
+            } else if (event.getClickCount() == 1) {
+                TablePosition cell = tableauListe.getSelectionModel().getSelectedCells().get(0);
+                int indexLigne = cell.getRow();
+                TableColumn colonne = cell.getTableColumn();
+                int id = tableauListe.getItems().get(indexLigne).getIdListe();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                ListeRepository liste = new ListeRepository();
+                alert.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.OK) {
+                        try {
+                            liste.supprimer(id);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+            }
+        }
+    }
+
 }

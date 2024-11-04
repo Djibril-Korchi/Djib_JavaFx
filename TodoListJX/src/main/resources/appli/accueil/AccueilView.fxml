@@ -12,7 +12,7 @@
          <font>
             <Font size="32.0" />
          </font></Label>
-      <TableView fx:id="tableauListe" layoutX="201.0" layoutY="54.0" prefHeight="346.0" prefWidth="399.0" />
+      <TableView fx:id="tableauListe" layoutX="201.0" layoutY="54.0" onMouseClicked="#onListeSelection" prefHeight="346.0" prefWidth="399.0" />
       <Label layoutX="201.0" layoutY="29.0" text="Enssemble des listes créées :" />
       <Button fx:id="deconnexion" layoutX="44.0" layoutY="337.0" mnemonicParsing="false" onAction="#onClicDeconnexion" prefHeight="26.0" prefWidth="103.0" text="Déconnexion" />
       <Button fx:id="type" layoutX="44.0" layoutY="294.0" mnemonicParsing="false" onAction="#OnClickType" prefHeight="26.0" prefWidth="103.0" text="Les types" />

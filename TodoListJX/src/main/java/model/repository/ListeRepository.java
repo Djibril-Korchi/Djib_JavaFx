@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ListeRepository {
+
     public ObservableList<Liste> liste() throws SQLException {
         Database db = new Database();
         PreparedStatement ps = db.getConnection().prepareStatement("SELECT * FROM liste");
@@ -25,6 +26,21 @@ public class ListeRepository {
         Database db = new Database();
         PreparedStatement ps = db.getConnection().prepareStatement("INSERT INTO liste(nom) VALUES (?)");
         ps.setString(1,nom);
+        ps.executeUpdate();
+        StartApplication.changeScene("accueil/AccueilView");
+    }
+    public void supprimer(int id) throws SQLException {
+        Database db = new Database();
+        PreparedStatement ps = db.getConnection().prepareStatement("DELETE FROM liste WHERE id_liste = ?");
+        ps.setInt(1,id);
+        ps.executeUpdate();
+        StartApplication.changeScene("accueil/AccueilView");
+    }
+    public void modifier(int id,String nom) throws SQLException {
+        Database db = new Database();
+        PreparedStatement ps = db.getConnection().prepareStatement("UPDATE liste SET nom = ? WHERE id_liste = ?");
+        ps.setString(1,nom);
+        ps.setInt(2,id);
         ps.executeUpdate();
         StartApplication.changeScene("accueil/AccueilView");
     }
