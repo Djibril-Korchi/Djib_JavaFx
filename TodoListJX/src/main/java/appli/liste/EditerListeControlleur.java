@@ -26,6 +26,10 @@ public class EditerListeControlleur {
         EditerListeControlleur.id = id;
     }
 
+    public static int getId() {
+        return id;
+    }
+
     @FXML
     void onClickModif(ActionEvent event) throws SQLException {
         ListeRepository lr = new ListeRepository();

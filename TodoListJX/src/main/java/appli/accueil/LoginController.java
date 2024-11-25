@@ -34,7 +34,7 @@ public class LoginController {
     @FXML
     void onClickConnection(ActionEvent event) throws SQLException {
         UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
-        utilisateurRepository.connection(this.email.getText());
+        utilisateurRepository.connection(this.email.getText(),this.mdp.getText());
     }
 
     @FXML

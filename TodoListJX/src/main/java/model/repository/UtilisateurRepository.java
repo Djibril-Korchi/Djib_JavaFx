@@ -1,8 +1,10 @@
 package model.repository;
 
 import appli.StartApplication;
+import appli.accueil.PageAccueilControlleur;
 import appli.database.Database;
 import model.Entity.User;
+import model.Entity.UtilisateurConnecte;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.*;
@@ -36,16 +38,37 @@ public class UtilisateurRepository {
             StartApplication.changeScene("accueil/inscriptionView");
         }
     }
-    public void connection(String email) throws SQLException {
+    public void connection(String email, String mdp) throws SQLException {
         Database db = new Database();
-        PreparedStatement requetePrepare = db.getConnection().prepareStatement("SELECT * FROM Utilisateur WHERE email = ?");
+        PreparedStatement requetePrepare = db.getConnection().prepareStatement("SELECT * FROM Utilisateur WHERE email = ? ");
         requetePrepare.setString(1, email);
         ResultSet resultat = requetePrepare.executeQuery();
         if (resultat.next()) {
-            System.out.println("test");
-            User userControlleur = new User(resultat.getInt(1),resultat.getString(2),resultat.getString(3),resultat.getString(4),resultat.getString(5));
-            StartApplication.changeScene("accueil/AccueilView");
-        }else {
+            // Vérification du mot de passe
+            if (encoder.matches(mdp, resultat.getString("mot_de_passe"))) {
+                // Création de l'utilisateur
+                User userControlleur = new User(
+                        resultat.getInt(1),
+                        resultat.getString(2),
+                        resultat.getString(3),
+                        resultat.getString(4),
+                        resultat.getString(5)
+                );
+
+                // Initialisation de l'utilisateur connecté
+                if (UtilisateurConnecte.initInstance(userControlleur)) {
+                    // Changement de scène vers l'accueil
+                    StartApplication.changeScene("accueil/AccueilView");
+                } else {
+                    System.out.println("Un utilisateur est déjà connecté !");
+                    StartApplication.changeScene("accueil/loginView");
+                }
+            } else {
+                System.out.println("Mot de passe incorrect !");
+                StartApplication.changeScene("accueil/loginView");
+            }
+        } else {
+            System.out.println("Aucun utilisateur trouvé avec cet email !");
             StartApplication.changeScene("accueil/loginView");
         }
     }

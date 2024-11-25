@@ -10,6 +10,7 @@ module com.example.todolistjx {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires spring.security.crypto;
+    requires spring.security.core;
 
     opens model.Entity to javafx.base;
     opens appli to javafx.fxml;

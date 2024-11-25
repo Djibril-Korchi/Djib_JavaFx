@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import model.Entity.Liste;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import model.Entity.UtilisateurConnecte;
 import model.repository.ListeRepository;
 import javafx.scene.control.Alert;
 import java.net.URL;
@@ -21,6 +22,8 @@ public class PageAccueilControlleur implements Initializable {
     private TableView<Liste> tableauListe;
     @FXML
     private Button ajouter;
+    @FXML
+    private Label nom;
 
     @FXML
     private Button deconnexion;
@@ -28,7 +31,22 @@ public class PageAccueilControlleur implements Initializable {
     @FXML
     private Button type;
 
-    private Button delete;
+    @FXML
+    private Button suprimer;
+
+    private static int id;
+
+    public static int getId() {
+        return id;
+    }
+
+    public static void setId(int id) {
+        PageAccueilControlleur.id = id;
+    }
+
+
+
+
 
     @FXML
     void OnClickType(ActionEvent event) {
@@ -37,6 +55,7 @@ public class PageAccueilControlleur implements Initializable {
 
     @FXML
     void onClicDeconnexion(ActionEvent event) {
+        UtilisateurConnecte.clearInstance();
         StartApplication.changeScene("accueil/loginView");
     }
 
@@ -46,15 +65,18 @@ public class PageAccueilControlleur implements Initializable {
     }
 
     public void initialize(URL url, ResourceBundle rb) {
+        this.nom.setText("BIENVENUS "+UtilisateurConnecte.getInstance().getNom()+" "+UtilisateurConnecte.getInstance().getPrenom()+" !");
         String[][] colonnes = {
                 {"Id liste", "idListe"},
                 {"Nom", "nom"}
         };
+        this.suprimer.setVisible(false);
         for (int i= 0; i < colonnes.length; i++) {
             TableColumn<Liste, String> maColone = new TableColumn<>(colonnes[i][0]);
             maColone.setCellValueFactory(new PropertyValueFactory<>(colonnes[i][1]));
             tableauListe.getColumns().add(maColone);
         }
+
         ListeRepository liste = new ListeRepository();
 
         try {
@@ -73,28 +95,32 @@ public class PageAccueilControlleur implements Initializable {
             if (event.getClickCount() == 2) {
                 TablePosition cell = tableauListe.getSelectionModel().getSelectedCells().get(0);
                 int indexLigne = cell.getRow();
-                TableColumn colonne = cell.getTableColumn();
                 int id = tableauListe.getItems().get(indexLigne).getIdListe();
-                System.out.println(id);
                 StartApplication.changeSceneInfo("liste/editerlisteView",new EditerListeControlleur(id));
             } else if (event.getClickCount() == 1) {
                 TablePosition cell = tableauListe.getSelectionModel().getSelectedCells().get(0);
                 int indexLigne = cell.getRow();
-                TableColumn colonne = cell.getTableColumn();
                 int id = tableauListe.getItems().get(indexLigne).getIdListe();
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                ListeRepository liste = new ListeRepository();
-                alert.showAndWait().ifPresent(response -> {
-                    if (response == ButtonType.OK) {
-                        try {
-                            liste.supprimer(id);
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                });
+                setId(id);
+                this.suprimer.setVisible(true);
             }
         }
     }
+
+    public void OnClickSuprimer(ActionEvent actionEvent) {
+        System.out.println(getId());
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ListeRepository liste = new ListeRepository();
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    liste.supprimer(PageAccueilControlleur.getId());
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
 
 }

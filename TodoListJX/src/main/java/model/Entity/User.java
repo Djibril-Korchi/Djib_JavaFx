@@ -7,7 +7,12 @@ public class User {
     private String email;
     private String mdp;
 
-    public User(int anInt, String string, String string1, String string2, String string3) {
+    public User(int idUser, String nom, String prenom, String email, String mdp) {
+        this.idUser = idUser;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.mdp = mdp;
     }
 
     public int getIdUser() {
@@ -48,8 +53,6 @@ public class User {
 
     public void setMdp(String mdp) {
         this.mdp = mdp;
-    }
-    public User() {
     }
 
     @Override

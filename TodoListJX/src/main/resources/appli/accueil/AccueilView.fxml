@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.PageAccueilControlleur">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" text="Bienvenue !">
+      <Label fx:id="nom" layoutX="14.0" layoutY="14.0" text="Bienvenue !">
          <font>
             <Font size="32.0" />
          </font></Label>
@@ -17,5 +17,6 @@
       <Button fx:id="deconnexion" layoutX="44.0" layoutY="337.0" mnemonicParsing="false" onAction="#onClicDeconnexion" prefHeight="26.0" prefWidth="103.0" text="Déconnexion" />
       <Button fx:id="type" layoutX="44.0" layoutY="294.0" mnemonicParsing="false" onAction="#OnClickType" prefHeight="26.0" prefWidth="103.0" text="Les types" />
       <Button fx:id="ajouter" layoutX="44.0" layoutY="254.0" mnemonicParsing="false" onAction="#onClickAjouter" text="Ajouter une liste" />
+      <Button fx:id="suprimer" layoutX="70.0" layoutY="200.0" mnemonicParsing="false" onAction="#OnClickSuprimer" text="Disable" />
    </children>
 </AnchorPane>
