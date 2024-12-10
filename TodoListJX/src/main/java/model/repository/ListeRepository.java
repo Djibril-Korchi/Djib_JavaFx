@@ -4,6 +4,7 @@ import appli.StartApplication;
 import appli.database.Database;
 import eu.hansolo.toolbox.observables.ObservableList;
 import model.Entity.Liste;
+import model.Entity.UtilisateurConnecte;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +28,17 @@ public class ListeRepository {
         PreparedStatement ps = db.getConnection().prepareStatement("INSERT INTO liste(nom) VALUES (?)");
         ps.setString(1,nom);
         ps.executeUpdate();
-        StartApplication.changeScene("accueil/AccueilView");
+        ps = db.getConnection().prepareStatement("SELECT * FROM liste WHERE nom = ?");
+        ps.setString(1,nom);
+        ResultSet resultat = ps.executeQuery();
+        if (resultat.next()) {
+            ps = db.getConnection().prepareStatement("INSERT INTO utilisateur_liste(ref_utilisateur,ref_liste) VALUES (?,?)");
+            ps.setInt(1, UtilisateurConnecte.getInstance().getIdUser());
+            ps.setInt(2,resultat.getInt(1));
+            ps.executeUpdate();
+            StartApplication.changeScene("accueil/AccueilView");
+        }
+
     }
     public void supprimer(int id) throws SQLException {
         Database db = new Database();

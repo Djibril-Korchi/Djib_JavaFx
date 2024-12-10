@@ -72,4 +72,20 @@ public class UtilisateurRepository {
             StartApplication.changeScene("accueil/loginView");
         }
     }
+
+    public void NewMdp(String email, String mdp) throws SQLException {
+        Database db = new Database();
+        PreparedStatement requetePrepare = db.getConnection().prepareStatement("SELECT * FROM Utilisateur WHERE email = ? ");
+        requetePrepare.setString(1, email);
+        ResultSet resultat = requetePrepare.executeQuery();
+        if (resultat.next()) {
+            PreparedStatement preparedStatement = db.getConnection().prepareStatement("UPDATE utilisateur SET mot_de_passe = ? WHERE email = ?");
+            preparedStatement.setString(1, encoder.encode(mdp));
+            preparedStatement.setString(2, email);
+            preparedStatement.executeUpdate();
+            StartApplication.changeScene("accueil/loginView");
+        }else {
+            StartApplication.changeScene("accueil/NewMdp");
+        }
+    }
 }

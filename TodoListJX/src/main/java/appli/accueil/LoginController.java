@@ -44,6 +44,6 @@ public class LoginController {
 
     @FXML
     void onClickMdp(ActionEvent event) {
-        StartApplication.changeScene("accueil/loginView");
+        StartApplication.changeScene("accueil/NewMdp");
     }
 }
