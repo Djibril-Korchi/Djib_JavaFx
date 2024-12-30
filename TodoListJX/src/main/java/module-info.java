@@ -19,4 +19,8 @@ module com.example.todolistjx {
     opens appli.accueil to javafx.fxml;
     exports appli.liste;
     opens appli.liste to javafx.fxml;
+    opens appli.type to javafx.fxml;
+    exports appli.type;
+    opens appli.tache to javafx.fxml;
+    exports appli.tache;
 }

@@ -1,6 +1,7 @@
 package appli.accueil;
 import appli.StartApplication;
 import appli.liste.EditerListeControlleur;
+import appli.tache.AjouterControlleur;
 import eu.hansolo.toolbox.observables.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -32,6 +33,9 @@ public class PageAccueilControlleur implements Initializable {
     private Button type;
 
     @FXML
+    private Button tache;
+
+    @FXML
     private Button suprimer;
 
     private static int id;
@@ -46,11 +50,17 @@ public class PageAccueilControlleur implements Initializable {
 
 
 
-
+    @FXML
+    void OnClickTache(ActionEvent event) {
+        TablePosition cell = tableauListe.getSelectionModel().getSelectedCells().get(0);
+        int indexLigne = cell.getRow();
+        int id = tableauListe.getItems().get(indexLigne).getIdListe();
+        StartApplication.changeSceneInfo("tache/Ajouter", new AjouterControlleur(id));
+    }
 
     @FXML
     void OnClickType(ActionEvent event) {
-
+        StartApplication.changeScene("type/Ajouter");
     }
 
     @FXML
@@ -71,6 +81,7 @@ public class PageAccueilControlleur implements Initializable {
                 {"Nom", "nom"}
         };
         this.suprimer.setVisible(false);
+        this.tache.setVisible(false);
         for (int i= 0; i < colonnes.length; i++) {
             TableColumn<Liste, String> maColone = new TableColumn<>(colonnes[i][0]);
             maColone.setCellValueFactory(new PropertyValueFactory<>(colonnes[i][1]));
@@ -103,6 +114,7 @@ public class PageAccueilControlleur implements Initializable {
                 int id = tableauListe.getItems().get(indexLigne).getIdListe();
                 setId(id);
                 this.suprimer.setVisible(true);
+                this.tache.setVisible(true);
             }
         }
     }
