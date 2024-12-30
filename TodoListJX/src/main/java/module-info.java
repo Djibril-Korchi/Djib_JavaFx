@@ -11,6 +11,7 @@ module com.example.todolistjx {
     requires java.sql;
     requires spring.security.crypto;
     requires spring.security.core;
+    requires mysql.connector.j;
 
     opens model.Entity to javafx.base;
     opens appli to javafx.fxml;

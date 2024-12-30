@@ -1,9 +1,13 @@
 package model.Entity;
 
+import com.mysql.cj.conf.StringProperty;
+
 public class Type {
     private int idType;
     private String nom;
     private String code_coulleur;
+
+
 
     public int getIdType() {
         return idType;

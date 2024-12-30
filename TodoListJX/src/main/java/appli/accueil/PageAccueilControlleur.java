@@ -2,6 +2,7 @@ package appli.accueil;
 import appli.StartApplication;
 import appli.liste.EditerListeControlleur;
 import appli.tache.AjouterControlleur;
+import appli.tache.TacheControlleur;
 import eu.hansolo.toolbox.observables.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -55,12 +56,12 @@ public class PageAccueilControlleur implements Initializable {
         TablePosition cell = tableauListe.getSelectionModel().getSelectedCells().get(0);
         int indexLigne = cell.getRow();
         int id = tableauListe.getItems().get(indexLigne).getIdListe();
-        StartApplication.changeSceneInfo("tache/Ajouter", new AjouterControlleur(id));
+        StartApplication.changeSceneInfo("tache/tache", new TacheControlleur(id));
     }
 
     @FXML
     void OnClickType(ActionEvent event) {
-        StartApplication.changeScene("type/Ajouter");
+        StartApplication.changeScene("type/type");
     }
 
     @FXML
@@ -107,7 +108,8 @@ public class PageAccueilControlleur implements Initializable {
                 TablePosition cell = tableauListe.getSelectionModel().getSelectedCells().get(0);
                 int indexLigne = cell.getRow();
                 int id = tableauListe.getItems().get(indexLigne).getIdListe();
-                StartApplication.changeSceneInfo("liste/editerlisteView",new EditerListeControlleur(id));
+                String nom = tableauListe.getItems().get(indexLigne).getNom();
+                StartApplication.changeSceneInfo("liste/editerlisteView",new EditerListeControlleur(id,nom));
             } else if (event.getClickCount() == 1) {
                 TablePosition cell = tableauListe.getSelectionModel().getSelectedCells().get(0);
                 int indexLigne = cell.getRow();

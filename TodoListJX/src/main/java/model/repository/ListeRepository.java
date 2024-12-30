@@ -15,7 +15,7 @@ public class ListeRepository {
     public ObservableList<Liste> liste() throws SQLException {
         Database db = new Database();
         PreparedStatement ps = db.getConnection().prepareStatement("SELECT * FROM liste");
-         ResultSet rs = ps.executeQuery();
+        ResultSet rs = ps.executeQuery();
         ObservableList<Liste> list = new ObservableList<>();
          while (rs.next()) {
              Liste liste = new Liste(rs.getInt("id_liste"), rs.getString("nom"));

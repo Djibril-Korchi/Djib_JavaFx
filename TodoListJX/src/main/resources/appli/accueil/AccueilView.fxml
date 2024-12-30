@@ -17,7 +17,7 @@
       <Button fx:id="deconnexion" layoutX="44.0" layoutY="337.0" mnemonicParsing="false" onAction="#onClicDeconnexion" prefHeight="26.0" prefWidth="103.0" text="Déconnexion" />
       <Button fx:id="type" layoutX="44.0" layoutY="294.0" mnemonicParsing="false" onAction="#OnClickType" prefHeight="26.0" prefWidth="103.0" text="Les types" />
       <Button fx:id="ajouter" layoutX="44.0" layoutY="254.0" mnemonicParsing="false" onAction="#onClickAjouter" text="Ajouter une liste" />
-      <Button fx:id="tache" layoutX="43.0" layoutY="214.0" mnemonicParsing="false" onAction="#OnClickTache" prefHeight="26.0" prefWidth="103.0" text="Ajouter tache " />
+      <Button fx:id="tache" layoutX="43.0" layoutY="214.0" mnemonicParsing="false" onAction="#OnClickTache" prefHeight="26.0" prefWidth="103.0" text="Tache " />
       <Button fx:id="suprimer" layoutX="44.0" layoutY="173.0" mnemonicParsing="false" onAction="#OnClickSuprimer" prefHeight="26.0" prefWidth="103.0" text="Suprimer" />
    </children>
 </AnchorPane>

@@ -7,6 +7,7 @@ public class Tache {
     private int ref_liste;
     private int ref_type;
 
+
     public int getIdTache() {
         return idTache;
     }

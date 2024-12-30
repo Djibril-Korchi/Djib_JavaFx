@@ -33,7 +33,7 @@ public class AjouterControlleur {
         TypeRepository typeRepository = new TypeRepository();
         if (this.code.getText().length()<8) {
             typeRepository.NewType(this.nom.getText(),this.code.getText());
-            StartApplication.changeScene("accueil/AccueilView");
+            StartApplication.changeScene("type/type");
 
         }else {
             StartApplication.changeScene("type/Ajouter");
